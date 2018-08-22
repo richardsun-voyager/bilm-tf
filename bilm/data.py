@@ -260,7 +260,7 @@ class TokenBatcher(object):
         return X_ids
 
 
-##### for training
+##### for training, this part generates input words and target words. Actually, target words are 1 shift of inputs.
 def _get_batch(generator, batch_size, num_steps, max_word_length):
     """Read batches of input."""
     cur_stream = [None] * batch_size
@@ -294,6 +294,7 @@ def _get_batch(generator, batch_size, num_steps, max_word_length):
                 if max_word_length is not None:
                     char_inputs[i, cur_pos:next_pos] = cur_stream[i][1][
                                                                     :how_many]
+                #Target means next word of the input    
                 targets[i, cur_pos:next_pos] = cur_stream[i][0][1:how_many+1]
 
                 cur_pos = next_pos
