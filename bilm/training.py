@@ -26,7 +26,7 @@ def print_variable_summary():
     variables = sorted([[v.name, v.get_shape()] for v in tf.global_variables()])
     pprint.pprint(variables)
 
-
+#If I would like to use my own model like CNN model, I can change this part.
 class LanguageModel(object):
     '''
     A class to build the tensorflow computational graph for NLMs
