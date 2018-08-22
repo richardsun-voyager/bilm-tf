@@ -26,7 +26,7 @@ def print_variable_summary():
     variables = sorted([[v.name, v.get_shape()] for v in tf.global_variables()])
     pprint.pprint(variables)
 
-
+#If I wanna use my own model like GRU or CNN, I can change this part
 class LanguageModel(object):
     '''
     A class to build the tensorflow computational graph for NLMs
@@ -321,7 +321,7 @@ class LanguageModel(object):
         self.embedding = embedding
         if self.bidirectional:
             self.embedding_reverse = embedding_reverse
-
+    #Note, this part shows the architecture of biLSTM neural networks, We can change it
     def _build(self):
         # size of input options
         n_tokens_vocab = self.options['n_tokens_vocab']
