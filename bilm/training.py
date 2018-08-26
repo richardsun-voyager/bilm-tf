@@ -347,6 +347,7 @@ class LanguageModel(object):
         self.final_lstm_state = []
 
         # get the LSTM inputs
+        #Acutally, the inputs for forward and backward LSTM are different
         if self.bidirectional:
             lstm_inputs = [self.embedding, self.embedding_reverse]
         else:
@@ -362,6 +363,7 @@ class LanguageModel(object):
             print("USING SKIP CONNECTIONS")
 
         lstm_outputs = []
+        #One lstm for forward, and one for backward, they don't share
         for lstm_num, lstm_input in enumerate(lstm_inputs):
             lstm_cells = []
             for i in range(n_lstm_layers):
@@ -489,7 +491,7 @@ class LanguageModel(object):
             next_ids = [self.next_token_id, self.next_token_id_reverse]
         else:
             next_ids = [self.next_token_id]
-
+        #If bidirectional, there are two ids, one is forward, the other is backward    
         for id_placeholder, lstm_output_flat in zip(next_ids, lstm_outputs):
             # flatten the LSTM output and next token id gold to shape:
             # (batch_size * unroll_steps, softmax_dim)
